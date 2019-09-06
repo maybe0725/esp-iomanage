@@ -1,0 +1,10 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    driver-class-name: com.tmax.tibero.jdbc.TbDriver
+    url: jdbc:tibero:thin:@172.16.51.71:8629:HLD
+    username: appdev
+    password: app_dev!@#  devtools:    livereload:      enabled: true
+  thymeleaf:    cache: false

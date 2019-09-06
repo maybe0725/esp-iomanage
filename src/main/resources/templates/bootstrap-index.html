@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    
+    <style>
+        .bd-callout {
+            padding: 1.25rem;
+            margin-top: 1.25rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #eee;
+            border-left-width: .25rem;
+            border-radius: .25rem;
+        }
+        .bd-callout-info {
+            border-left-color: #5bc0de;
+		}
+		.bd-callout-warning {
+            border-left-color: #f0ad4e;
+        }
+        .bd-callout-danger {
+		    border-left-color: #d9534f;
+		}
+    </style>
+    
+    <title>Hello, world!</title>
+</head>
+<body>
+
+    <div style="padding: 20px">
+    
+        <h2 id="examples"><span class="bd-content-title">Overview</span></h2>
+        
+        <p><h2 id="examples"><span class="bd-content-title">examples</span></h2></p>
+        
+        <p>Things to know when using the tooltip plugin:</p>
+        <ul>
+		  <li>Tooltips rely on the 3rd party library <a href="https://popper.js.org/">Popper.js</a> for positioning. You must include <a href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">popper.min.js</a> before bootstrap.js or use <code class="highlighter-rouge">bootstrap.bundle.min.js</code> / <code class="highlighter-rouge">bootstrap.bundle.js</code> which contains Popper.js in order for tooltips to work!</li>
+		  <li>If you’re building our JavaScript from source, it <a href="/docs/4.3/getting-started/javascript/#util">requires <code class="highlighter-rouge">util.js</code></a>.</li>
+		  <li>Tooltips are opt-in for performance reasons, so <strong>you must initialize them yourself</strong>.</li>
+		  <li>Tooltips with zero-length titles are never displayed.</li>
+		  <li>Specify <code class="highlighter-rouge">container: 'body'</code> to avoid rendering problems in more complex components (like our input groups, button groups, etc).</li>
+		  <li>Triggering tooltips on hidden elements will not work.</li>
+		  <li>Tooltips for <code class="highlighter-rouge">.disabled</code> or <code class="highlighter-rouge">disabled</code> elements must be triggered on a wrapper element.</li>
+		  <li>When triggered from hyperlinks that span multiple lines, tooltips will be centered. Use <code class="highlighter-rouge">white-space: nowrap;</code> on your <code class="highlighter-rouge">&lt;a&gt;</code>s to avoid this behavior.</li>
+		  <li>Tooltips must be hidden before their corresponding elements have been removed from the DOM.</li>
+		  <li>Tooltips can be triggered thanks to an element inside a shadow DOM.</li>
+		</ul>
+        
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">alert alert-primary</h4>
+            <p>alert alert-primary</p>
+            <hr />
+            <p class="mb-0">alert alert-primary</p>
+        </div>
+        
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">alert alert-warning</h4>
+            <p>alert alert-warning</p>
+            <hr />
+            <p class="mb-0">alert alert-warning</p>
+        </div>
+        
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">alert alert-danger</h4>
+            <p>alert alert-danger</p>
+            <hr />
+            <p class="mb-0">alert alert-danger</p>
+        </div>
+        
+        <div class="bd-callout bd-callout-info">
+            <h5 id="overflow-auto-and-scroll">Overflow <code class="highlighter-rouge">auto</code> and <code class="highlighter-rouge">scroll</code></h5>
+            <p>Tooltip position attempts to automatically change when a parent container has <code class="highlighter-rouge">overflow: auto</code> or <code class="highlighter-rouge">overflow: scroll</code> like our <code class="highlighter-rouge">.table-responsive</code>, but still keeps the original placement’s positioning. To resolve, set the <code class="highlighter-rouge">boundary</code> option to anything other than default value, <code class="highlighter-rouge">'scrollParent'</code>, such as <code class="highlighter-rouge">'window'</code>:</p>
+        </div>
+        <div class="bd-callout bd-callout-warning">
+            <h5 id="overflow-auto-and-scroll">Overflow <code class="highlighter-rouge">auto</code> and <code class="highlighter-rouge">scroll</code></h5>
+            <p>Tooltip position attempts to automatically change when a parent container has <code class="highlighter-rouge">overflow: auto</code> or <code class="highlighter-rouge">overflow: scroll</code> like our <code class="highlighter-rouge">.table-responsive</code>, but still keeps the original placement’s positioning. To resolve, set the <code class="highlighter-rouge">boundary</code> option to anything other than default value, <code class="highlighter-rouge">'scrollParent'</code>, such as <code class="highlighter-rouge">'window'</code>:</p>
+        </div>
+        <div class="bd-callout bd-callout-danger">
+            <h5 id="overflow-auto-and-scroll">Overflow <code class="highlighter-rouge">auto</code> and <code class="highlighter-rouge">scroll</code></h5>
+            <p>Tooltip position attempts to automatically change when a parent container has <code class="highlighter-rouge">overflow: auto</code> or <code class="highlighter-rouge">overflow: scroll</code> like our <code class="highlighter-rouge">.table-responsive</code>, but still keeps the original placement’s positioning. To resolve, set the <code class="highlighter-rouge">boundary</code> option to anything other than default value, <code class="highlighter-rouge">'scrollParent'</code>, such as <code class="highlighter-rouge">'window'</code>:</p>
+        </div>
+        
+    </div>
+
+</body>
+</html>

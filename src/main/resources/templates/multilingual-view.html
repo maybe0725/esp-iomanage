@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>ESP - Nexacro UI 다국어 처리</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/simple-spinners.css}" rel="stylesheet" />
+	<style type="text/css">
+        .bd-callout {
+            padding: 1.25rem;
+            margin-top: 1.25rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #eee;
+            border-left-width: .25rem;
+            border-radius: .25rem;
+        }
+        .bd-callout-info {
+            border-left-color: #5bc0de;
+        }
+        .bd-callout-warning {
+            border-left-color: #f0ad4e;
+        }
+        .bd-callout-danger {
+            border-left-color: #d9534f;
+        }
+	</style>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+	<div class="container mt-3">
+		<h2>Nexacro UI 다국어 처리</h2>
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#svn" onclick="exchangeTab('svn')">SVN</a>
+            </li>
+            <!--  
+			<li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#co" onclick="exchangeTab('co')">CO</a>
+            </li>
+            -->
+			<li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#fi" onclick="exchangeTab('fi')">FI</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#od" onclick="exchangeTab('od')">OD</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#pd" onclick="exchangeTab('pd')">PD</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#pi" onclick="exchangeTab('pi')">PI</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#sc" onclick="exchangeTab('sc')">SC</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tr" onclick="exchangeTab('tr')">TR</a>
+            </li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div id="svn" class="container tab-pane active">
+				<br />
+				<h3>SVN</h3>
+				<div class="bd-callout bd-callout-warning">
+                    <p>SVN Resource 기준으로 다국어 반영을 하기 위해서는 <strong>revision number</strong> 를 입력해야 합니다.</p>
+                    <p>revision number 는 <strong>Jenkins</strong> 화면에서 확인 할 수 있습니다.</p>
+                    <p><mark>※ 해당 기능은 수동으로 다국어 반영을 해야 할 경우 사용을 권장 합니다.</mark></p>
+                </div>
+                <div class="form-inline">
+	                <label for="revision">SVN Revision : </label>&nbsp;&nbsp;
+	                <input type="text" class="form-control" id="revision" placeholder="Enter SVN Revision" name="revision" 
+	                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />&nbsp;&nbsp;
+	                <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executeRevision()">다국어 반영</button>
+                </div>
+			</div>
+			<!-- Package : CO -->
+			<div id="co" class="container tab-pane fade">
+				<br />
+				<h3>CO : 원가</h3>
+				<div class="bd-callout bd-callout-info">
+				    <div style="float:left; width: 50px;">COA</div><div style="float:left; width: 20px;">:</div><div>경영정보</div>
+                    <div style="float:left; width: 50px;">COB</div><div style="float:left; width: 20px;">:</div><div>예산관리</div>
+                    <div style="float:left; width: 50px;">COC</div><div style="float:left; width: 20px;">:</div><div>실적관보</div>
+                    <div style="float:left; width: 50px;">COI</div><div style="float:left; width: 20px;">:</div><div>투자관리</div>
+                    <div style="float:left; width: 50px;">COM</div><div style="float:left; width: 20px;">:</div><div>원가기준정보</div>
+                    <div style="float:left; width: 50px;">COP</div><div style="float:left; width: 20px;">:</div><div>계획관리</div>
+                    <div style="float:left; width: 50px;">COS</div><div style="float:left; width: 20px;">:</div><div>원가설정관리</div>
+                </div>
+                <div class="bd-callout bd-callout-info">
+				    <div class="form-group">
+	                    <label for="coModule" class="text-secondary">다국어를 반영할 CO(원가) 모듈(Module)을 선택 하세요.</label>
+	                    <select class="form-control" id="coModule" name="selectCoList">
+	                        <option value="">- Select CO Module -</option>
+	                        <option value="Biz.Co.Coa">Coa</option>
+							<option value="Biz.Co.Cob">Cob</option>
+							<option value="Biz.Co.Coc">Coc</option>
+							<option value="Biz.Co.Coi">Coi</option>
+							<option value="Biz.Co.Com">Com</option>
+							<option value="Biz.Co.Cop">Cop</option>
+							<option value="Biz.Co.Cos">Cos</option>
+	                    </select>
+				        <br/>
+				        <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executePackage(this, 'co')">다국어 반영</button>
+				    </div>
+			    </div>
+			</div>
+			<!-- Package : FI -->
+			<div id="fi" class="container tab-pane fade">
+				<br />
+				<h3>FI : 회계</h3>
+                <div class="bd-callout bd-callout-info">
+                    <div style="float:left; width: 50px;">FIG</div><div style="float:left; width: 20px;">:</div><div>일반회계</div>
+                    <div style="float:left; width: 50px;">FIM</div><div style="float:left; width: 20px;">:</div><div>회계기준정보</div>
+                    <div style="float:left; width: 50px;">FIP</div><div style="float:left; width: 20px;">:</div><div>매입채무</div>
+                    <div style="float:left; width: 50px;">FIR</div><div style="float:left; width: 20px;">:</div><div>매출채권</div>
+                    <div style="float:left; width: 50px;">FIS</div><div style="float:left; width: 20px;">:</div><div>회계설정관리</div>
+                    <div style="float:left; width: 50px;">FIT</div><div style="float:left; width: 20px;">:</div><div>세무관리</div>
+                </div>
+                <div class="bd-callout bd-callout-info">
+					<div class="form-group">
+	                    <label for="fiModule" class="text-secondary">다국어를 반영할 FI(회계) 모듈(Module)을 선택 하세요.</label>
+	                    <select class="form-control" id="fiModule" name="selectFiList">
+	                        <option value="">- Select FI Module -</option>
+	                        <option value="Biz.Fi.Fig">Fig</option>
+	                        <option value="Biz.Fi.Fim">Fim</option>
+	                        <option value="Biz.Fi.Fip">Fip</option>
+	                        <option value="Biz.Fi.Fir">Fir</option>
+	                        <option value="Biz.Fi.Fis">Fis</option>
+	                        <option value="Biz.Fi.Fit">Fit</option>
+	                    </select>
+	                    <br/>
+	                    <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executePackage('fi')">다국어 반영</button>
+	                </div>
+	            </div>
+			</div>
+			<!-- Package : OD -->
+            <div id="od" class="container tab-pane fade">
+                <br />
+                <h3>OD : 영업</h3>
+                <div class="bd-callout bd-callout-info">
+                    <div style="float:left; width: 50px;">ODB</div><div style="float:left; width: 20px;">:</div><div>매출관리</div>
+                    <div style="float:left; width: 50px;">ODD</div><div style="float:left; width: 20px;">:</div><div>출하관리</div>
+                    <div style="float:left; width: 50px;">ODM</div><div style="float:left; width: 20px;">:</div><div>영업기준정보</div>
+                    <div style="float:left; width: 50px;">ODO</div><div style="float:left; width: 20px;">:</div><div>주문관리</div>
+                    <div style="float:left; width: 50px;">ODP</div><div style="float:left; width: 20px;">:</div><div>판매계획</div>
+                    <div style="float:left; width: 50px;">ODS</div><div style="float:left; width: 20px;">:</div><div>영업설정관리</div>
+                </div>
+                <div class="bd-callout bd-callout-info">
+	                <div class="form-group">
+	                    <label for="fiModule" class="text-secondary">다국어를 반영할 OD(영업) 모듈(Module)을 선택 하세요.</label>
+	                    <select class="form-control" id="odModule" name="selectOdList">
+	                        <option value="">- Select OD Module -</option>
+	                        <option value="Biz.Od.Odb">Odb</option>
+	                        <option value="Biz.Od.Odd">Odd</option>
+	                        <option value="Biz.Od.Odm">Odm</option>
+	                        <option value="Biz.Od.Odo">Odo</option>
+	                        <option value="Biz.Od.Odp">Odp</option>
+	                        <option value="Biz.Od.Ods">Ods</option>
+	                    </select>
+	                    <br/>
+	                    <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executePackage('od')">다국어 반영</button>
+	                </div>
+	            </div>
+            </div>
+            <!-- Package : PD -->
+            <div id="pd" class="container tab-pane fade">
+                <br />
+                <h3>PD : 생산</h3>
+                <div class="bd-callout bd-callout-info">
+                    <div style="float:left; width: 50px;">PDC</div><div style="float:left; width: 20px;">:</div><div>생산마감</div>
+                    <div style="float:left; width: 50px;">PDE</div><div style="float:left; width: 20px;">:</div><div>생산실행</div>
+                    <div style="float:left; width: 50px;">PDM</div><div style="float:left; width: 20px;">:</div><div>생산기준정보</div>
+                    <div style="float:left; width: 50px;">PDP</div><div style="float:left; width: 20px;">:</div><div>생산계획</div>
+                    <div style="float:left; width: 50px;">PDS</div><div style="float:left; width: 20px;">:</div><div>생산설정관리</div>
+                </div>
+                <div class="bd-callout bd-callout-info">
+	                <div class="form-group">
+	                    <label for="fiModule" class="text-secondary">다국어를 반영할 PD(생상) 모듈(Module)을 선택 하세요.</label>
+	                    <select class="form-control" id="pdModule" name="selectPdList">
+	                        <option value="">- Select PD Module -</option>
+	                        <option value="Biz.Pd.Pdc">Pdc</option>
+	                        <option value="Biz.Pd.Pde">Pde</option>
+	                        <option value="Biz.Pd.Pdm">Pdm</option>
+	                        <option value="Biz.Pd.Pdp">Pdp</option>
+	                        <option value="Biz.Pd.Pds">Pds</option>
+	                    </select>
+	                    <br/>
+	                    <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executePackage('pd')">다국어 반영</button>
+	                </div>
+	            </div>
+            </div>
+            <!-- Package : PI -->
+            <div id="pi" class="container tab-pane fade">
+                <br />
+                <h3>PI : 구매</h3>
+                <div class="bd-callout bd-callout-info">
+                    <div style="float:left; width: 50px;">PII</div><div style="float:left; width: 20px;">:</div><div>재고관리</div>
+                    <div style="float:left; width: 50px;">PIM</div><div style="float:left; width: 20px;">:</div><div>구매기준정보</div>
+                    <div style="float:left; width: 50px;">PIO</div><div style="float:left; width: 20px;">:</div><div>구매관리</div>
+                    <div style="float:left; width: 50px;">PIP</div><div style="float:left; width: 20px;">:</div><div>송장관리</div>
+                    <div style="float:left; width: 50px;">PIS</div><div style="float:left; width: 20px;">:</div><div>구매설정관리</div>
+                    <div style="float:left; width: 50px;">PIT</div><div style="float:left; width: 20px;">:</div><div>출고관리</div>
+                </div>
+                <div class="bd-callout bd-callout-info">
+	                <div class="form-group">
+	                    <label for="fiModule" class="text-secondary">다국어를 반영할 PI(구매) 모듈(Module)을 선택 하세요.</label>
+	                    <select class="form-control" id="piModule" name="selectPiList">
+	                        <option value="">- Select PI Module -</option>
+	                        <option value="Biz.Pi.Pii">Pii</option>
+	                        <option value="Biz.Pi.Pim">Pim</option>
+	                        <option value="Biz.Pi.Pio">Pio</option>
+	                        <option value="Biz.Pi.Pip">Pip</option>
+	                        <option value="Biz.Pi.Pis">Pis</option>
+	                        <option value="Biz.Pi.Pit">Pit</option>
+	                    </select>
+	                    <br/>
+	                    <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executePackage('pi')">다국어 반영</button>
+	                </div>
+	            </div>
+            </div>
+            <!-- Package : SC -->
+            <div id="sc" class="container tab-pane fade">
+                <br />
+                <h3>SC : 공통</h3>
+                <div class="bd-callout bd-callout-info">
+                    <div style="float:left; width: 50px;">SCA</div><div style="float:left; width: 20px;">:</div><div>권한관리</div>
+                    <div style="float:left; width: 50px;">SCC</div><div style="float:left; width: 20px;">:</div><div>공통관리</div>
+                    <div style="float:left; width: 50px;">SCM</div><div style="float:left; width: 20px;">:</div><div>공통기준정보</div>
+                    <div style="float:left; width: 50px;">SCP</div><div style="float:left; width: 20px;">:</div><div>프로그램관리</div>
+                    <div style="float:left; width: 50px;">SCT</div><div style="float:left; width: 20px;">:</div><div>메타관리</div>
+                    <div style="float:left; width: 50px;">SCU</div><div style="float:left; width: 20px;">:</div><div>사용자관리</div>
+                </div>
+                <div class="bd-callout bd-callout-info">
+                    <div class="form-group">
+                        <label for="scModule" class="text-secondary">다국어를 반영할 SC(공통) 모듈(Module)을 선택 하세요.</label>
+                        <select class="form-control" id="scModule" name="selectScList">
+                            <option value="">- Select SC Module -</option>
+                            <option value="Biz.Sc.Sca">Sca</option>
+                            <option value="Biz.Sc.Scc">Scc</option>
+                            <option value="Biz.Sc.Scm">Scm</option>
+                            <option value="Biz.Sc.Scp">Scp</option>
+                            <option value="Biz.Sc.Sct">Sct</option>
+                            <option value="Biz.Sc.Scu">Scu</option>
+                        </select>
+                        <br/>
+                        <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executePackage('sc')">다국어 반영</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Package : TR -->
+            <div id="tr" class="container tab-pane fade">
+                <br />
+                <h3>TR : 자금</h3>
+                <div class="bd-callout bd-callout-info">
+                    <div style="float:left; width: 50px;">TRC</div><div style="float:left; width: 20px;">:</div><div>자금수지</div>
+                    <div style="float:left; width: 50px;">TRM</div><div style="float:left; width: 20px;">:</div><div>자금기준정보</div>
+                    <div style="float:left; width: 50px;">TRP</div><div style="float:left; width: 20px;">:</div><div>금융상품</div>
+                    <div style="float:left; width: 50px;">TRS</div><div style="float:left; width: 20px;">:</div><div>자금설정관리</div>
+                </div>
+                <div class="bd-callout bd-callout-info">
+                    <div class="form-group">
+                        <label for="trModule" class="text-secondary">다국어를 반영할 TR(자금) 모듈(Module)을 선택 하세요.</label>
+                        <select class="form-control" id="trModule" name="selectTrList">
+                            <option value="">- Select TR Module -</option>
+                            <option value="Biz.Tr.Trc">Trc</option>
+                            <option value="Biz.Tr.Trm">Trm</option>
+                            <option value="Biz.Tr.Trp">Trp</option>
+                            <option value="Biz.Tr.Trs">Trs</option>
+                        </select>
+                        <br/>
+                        <button type="button" id="executeBtn" class="btn btn-secondary" onclick="executePackage('tr')">다국어 반영</button>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+
+    <div id="spinners" style="display: none;">
+	    <div class="sk-fading-circle">
+	      <div class="sk-circle1 sk-circle"></div>
+	      <div class="sk-circle2 sk-circle"></div>
+	      <div class="sk-circle3 sk-circle"></div>
+	      <div class="sk-circle4 sk-circle"></div>
+	      <div class="sk-circle5 sk-circle"></div>
+	      <div class="sk-circle6 sk-circle"></div>
+	      <div class="sk-circle7 sk-circle"></div>
+	      <div class="sk-circle8 sk-circle"></div>
+	      <div class="sk-circle9 sk-circle"></div>
+	      <div class="sk-circle10 sk-circle"></div>
+	      <div class="sk-circle11 sk-circle"></div>
+	      <div class="sk-circle12 sk-circle"></div>
+	    </div>
+    </div>
+
+    <script>
+    function exchangeTab(tabName) {
+    	$("#revision").val("");     // SVN
+        $("#coModule").val("");     // CO : 원가
+        $("#fiModule").val("");     // FI : 회계
+        $("#odModule").val("");     // OD : 영업
+        $("#pdModule").val("");     // PD : 생산
+        $("#piModule").val("");     // PI : 구매
+        $("#scModule").val("");     // SC : 공통
+        $("#trModule").val("");     // TR : 자금
+    }
+    
+    function executeRevision() {
+        var inputRevision = $("#revision").val();
+        if (undefined == inputRevision || "" == inputRevision) {
+            alert("revision 을 입력하세요");
+        }else{
+        	callService(inputRevision, null);
+        }
+    }
+    
+    var executeFlag = false;
+    function executePackage(packageName) {
+    	
+    	var execPackage = $("#"+packageName+"Module").val();
+    	
+    	if (executeFlag) {
+    		alert("처리중 입니다.");
+    		return;
+    	}
+    	console.log("test...........");
+    	
+        if ( undefined == execPackage || "" == execPackage) {
+            alert("다국어 반영할 대상을 선택 하세요.");
+            $("#"+packageName+"Module").val("");
+        }else{
+        	$("#spinners").css("display", "");
+        	executeFlag = true;
+            callService(null, execPackage);
+        }
+    }
+    
+    function callService(revision, execPackage){
+        $.ajax({
+            url: "/iomanage/multilingual",
+            data: { revision: revision, execPackage: execPackage }
+        })
+        // HTTP 요청이 성공하면 요청한 데이터가 done() 메소드로 전달됨.
+        .done(function(responseData) {        	
+            alert(responseData);
+            $("#spinners").css("display", "none");
+            executeFlag = false;
+        })
+        // HTTP 요청이 실패하면 오류와 상태에 관한 정보가 fail() 메소드로 전달됨.
+        .fail(function(xhr, status, errorThrown) {        	
+            alert("Fail....");
+            $("#spinners").css("display", "none");
+            executeFlag = false;
+        });
+    }
+	</script>
+
+</body>
+</html>
